@@ -1,0 +1,27 @@
+
+
+.tictactoe {
+  text-align: center;
+  margin: auto; 
+}
+
+.title{
+  text-align: center;
+}
+
+.gameBoard{
+  display: flex;
+  margin: auto; 
+  padding-top: 10px;
+  width: 150px;
+  height: 150px;
+  flex-wrap: wrap;
+}
+
+.box{
+  text-align: center;
+  width: 33.33%;
+  height: 33.33%;
+  outline: 1px solid black;
+  cursor: pointer;
+}

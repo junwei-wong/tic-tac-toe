@@ -1,4 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
+import Boxes from "./Boxes";
 import { checkWin } from "../utils/helperFunctions";
 import style from "./style.css";
 
@@ -59,16 +60,6 @@ const GameBoard = () => {
 
   const resetGame = () => setBoxes([...initialState]);
 
-  const renderBox = (boxValue, index) => (
-    <div
-      className={style.boxes}
-      name={`boxes${index}`}
-      onClick={() => changeBoxValue(boxValue, index)}
-    >
-      {renderBoxValue(boxValue)}
-    </div>
-  );
-
   const changeBoxValue = (boxValue, index) => {
     if (boxValue === null) {
       const tempBox = [...boxes];
@@ -78,18 +69,18 @@ const GameBoard = () => {
     }
   };
 
-  const renderBoxValue = (boxValue) => {
-    if (!!boxValue) return "o";
-    else if (boxValue === null) return null;
-    else return "x";
-  };
-
   return (
     <div className={style.tictactoe}>
       <h1 className={style.title}>{} Turn</h1>
       <button onClick={resetGame}>Reset</button>
       <div className={style.gameBoard}>
-        {boxes.map((boxValue, index) => renderBox(boxValue, index))}
+        {boxes.map((boxValue, index) => (
+          <Boxes
+            boxValue={boxValue}
+            index={index}
+            changeBoxValue={changeBoxValue}
+          />
+        ))}
       </div>
     </div>
   );

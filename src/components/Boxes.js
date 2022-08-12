@@ -1,11 +1,12 @@
+import { getXicon, getOicon } from "./Icons";
 import style from "./style.css";
 
 const Boxes = (props) => {
   const { index, boxValue, changeBoxValue } = props;
 
   const renderBoxValue = (value) => {
-    if (value === true) return "o";
-    else if (value === false) return "x";
+    if (value === true) return getXicon();
+    else if (value === false) return getOicon();
     else return null;
   };
 

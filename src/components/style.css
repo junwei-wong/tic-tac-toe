@@ -1,12 +1,9 @@
-
-
-.tictactoe {
+.title{
+  display: block;
   text-align: center;
   margin: auto; 
-}
-
-.title{
-  text-align: center;
+  /* height: 60px; */
+  width: 90%;
 }
 
 .gameBoard{
@@ -19,9 +16,20 @@
 }
 
 .boxes{
-  text-align: center;
   width: 33.33%;
   height: 33.33%;
   outline: 1px solid black;
   cursor: pointer;
+}
+
+.icon{
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.iconintitle{
+  width: 40px;
+  height: 40px;
 }

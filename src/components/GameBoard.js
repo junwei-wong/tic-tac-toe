@@ -2,6 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import Boxes from "./Boxes";
 import { getXicon, getOicon } from "./Icons";
 import { checkWin } from "../utils/helperFunctions";
+import Swal from "sweetalert2";
 import style from "./style.css";
 
 const initialState = [null, null, null, null, null, null, null, null, null];
@@ -12,50 +13,50 @@ const GameBoard = () => {
   const [box1, box2, box3, box4, box5, box6, box7, box8, box9] = boxes;
 
   useEffect(() => {
-    if (![box1, box2, box3].includes(null) && checkWin(box1, box2, box3)) {
-      console.log("win123");
+    if (checkWin(box1, box2, box3)) {
+      showWinnerAlert();
     }
   }, [box1, box2, box3]);
 
   useEffect(() => {
-    if (![box4, box5, box6].includes(null) && checkWin(box4, box5, box6)) {
-      console.log("win456");
+    if (checkWin(box4, box5, box6)) {
+      showWinnerAlert();
     }
   }, [box4, box5, box6]);
 
   useEffect(() => {
-    if (![box7, box8, box9].includes(null) && checkWin(box7, box8, box9)) {
-      console.log("win789");
+    if (checkWin(box7, box8, box9)) {
+      showWinnerAlert();
     }
   }, [box7, box8, box9]);
 
   useEffect(() => {
-    if (![box1, box4, box7].includes(null) && checkWin(box1, box4, box7)) {
-      console.log("box1, box4, box7");
+    if (checkWin(box1, box4, box7)) {
+      showWinnerAlert();
     }
   }, [box1, box4, box7]);
 
   useEffect(() => {
-    if (![box2, box5, box8].includes(null) && checkWin(box2, box5, box8)) {
-      console.log("box2, box5, box8");
+    if (checkWin(box2, box5, box8)) {
+      showWinnerAlert();
     }
   }, [box2, box5, box8]);
 
   useEffect(() => {
-    if (![box3, box6, box9].includes(null) && checkWin(box3, box6, box9)) {
-      console.log("box3, box6, box9");
+    if (checkWin(box3, box6, box9)) {
+      showWinnerAlert();
     }
   }, [box3, box6, box9]);
 
   useEffect(() => {
-    if (![box1, box5, box9].includes(null) && checkWin(box1, box5, box9)) {
-      console.log("box1, box5, box9");
+    if (checkWin(box1, box5, box9)) {
+      showWinnerAlert();
     }
   }, [box1, box5, box9]);
 
   useEffect(() => {
-    if (![box3, box5, box7].includes(null) && checkWin(box3, box5, box7)) {
-      console.log("box3, box5, box7");
+    if (checkWin(box3, box5, box7)) {
+      showWinnerAlert();
     }
   }, [box3, box5, box7]);
 
@@ -64,12 +65,21 @@ const GameBoard = () => {
     setTurn(false);
   };
 
+  const changeTurn = () => setTurn((prevState) => !prevState);
+
+  const showWinnerAlert = () =>
+    Swal.fire({
+      title: "Victory!",
+      text: `${turn ? "X" : "O"} wins`,
+      confirmButtonText: "Cool",
+    });
+
   const changeBoxValue = (boxValue, index) => {
     if (boxValue === null) {
       const tempBox = [...boxes];
       tempBox[index] = turn;
       setBoxes([...tempBox]);
-      setTurn((prevState) => !prevState);
+      changeTurn();
     }
   };
 

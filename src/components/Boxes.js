@@ -5,8 +5,8 @@ const Boxes = (props) => {
   const { index, boxValue, changeBoxValue } = props;
 
   const renderBoxValue = (value) => {
-    if (value === true) return getXicon();
-    else if (value === false) return getOicon();
+    if (value === "O") return getOicon();
+    else if (value === "X") return getXicon();
     else return null;
   };
 

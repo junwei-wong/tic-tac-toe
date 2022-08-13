@@ -8,7 +8,7 @@ import style from "./style.css";
 const initialState = [null, null, null, null, null, null, null, null, null];
 
 const GameBoard = () => {
-  const [turn, setTurn] = useState(false);
+  const [turn, setTurn] = useState(0);
   const [boxes, setBoxes] = useState([...initialState]);
   const [freezeGame, setFreezeGame] = useState(false);
   const [box1, box2, box3, box4, box5, box6, box7, box8, box9] = boxes;
@@ -63,16 +63,20 @@ const GameBoard = () => {
 
   const resetGame = () => {
     setBoxes([...initialState]);
-    setTurn(false);
+    setTurn(0);
     setFreezeGame(false);
   };
 
-  const changeTurn = () => setTurn((prevState) => !prevState);
+  const changeTurn = () => setTurn((prevState) => prevState + 1);
+
+  const convertTurnToSymbol = (turnValue) => {
+    return turnValue % 2 === 0 ? "O" : "X";
+  };
 
   const showWinnerAlert = () => {
     Swal.fire({
       title: "Victory!",
-      text: `${turn ? "O" : "X"} wins`,
+      text: `${turn % 2 === 0 ? "O" : "X"} wins`,
       confirmButtonText: "Cool!",
       showCancelButton: true,
       cancelButtonText: "New Game",
@@ -85,7 +89,7 @@ const GameBoard = () => {
   const changeBoxValue = (boxValue, index) => {
     if (boxValue === null && !freezeGame) {
       const tempBox = [...boxes];
-      tempBox[index] = turn;
+      tempBox[index] = convertTurnToSymbol(turn);
       setBoxes([...tempBox]);
       changeTurn();
     }
@@ -94,7 +98,10 @@ const GameBoard = () => {
   return (
     <>
       <div className={style.header}>
-        {turn ? getXicon(style.iconintitle) : getOicon(style.iconintitle)}
+        <h1>Tic-Tac-Toe</h1>
+        {turn % 2 === 0
+          ? getOicon(style.iconintitle)
+          : getXicon(style.iconintitle)}
         <label>Turn</label>
         <button onClick={resetGame}>Reset</button>
       </div>

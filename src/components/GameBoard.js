@@ -10,6 +10,7 @@ const initialState = [null, null, null, null, null, null, null, null, null];
 const GameBoard = () => {
   const [turn, setTurn] = useState(false);
   const [boxes, setBoxes] = useState([...initialState]);
+  const [freezeGame, setFreezeGame] = useState(false);
   const [box1, box2, box3, box4, box5, box6, box7, box8, box9] = boxes;
 
   useEffect(() => {
@@ -63,19 +64,26 @@ const GameBoard = () => {
   const resetGame = () => {
     setBoxes([...initialState]);
     setTurn(false);
+    setFreezeGame(false);
   };
 
   const changeTurn = () => setTurn((prevState) => !prevState);
 
-  const showWinnerAlert = () =>
+  const showWinnerAlert = () => {
     Swal.fire({
       title: "Victory!",
-      text: `${turn ? "X" : "O"} wins`,
-      confirmButtonText: "Cool",
+      text: `${turn ? "O" : "X"} wins`,
+      confirmButtonText: "Cool!",
+      showCancelButton: true,
+      cancelButtonText: "New Game",
+    }).then((result) => {
+      if (result.isDismissed) resetGame();
+      else if (result.isConfirmed) setFreezeGame(true);
     });
+  };
 
   const changeBoxValue = (boxValue, index) => {
-    if (boxValue === null) {
+    if (boxValue === null && !freezeGame) {
       const tempBox = [...boxes];
       tempBox[index] = turn;
       setBoxes([...tempBox]);

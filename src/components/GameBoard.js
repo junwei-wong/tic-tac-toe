@@ -5,7 +5,7 @@ import { checkWin } from "../utils/helperFunctions";
 import Swal from "sweetalert2";
 import style from "./style.css";
 
-const initialState = [null, null, null, null, null, null, null, null, null];
+const initialState = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const GameBoard = () => {
   const [turn, setTurn] = useState(0);
@@ -86,8 +86,8 @@ const GameBoard = () => {
     });
   };
 
-  const changeBoxValue = (boxValue, index) => {
-    if (boxValue === null && !freezeGame) {
+  const changeBoxValue = (initialBoxValue, index) => {
+    if (typeof initialBoxValue === "number" && !freezeGame) {
       const tempBox = [...boxes];
       tempBox[index] = convertTurnToSymbol(turn);
       setBoxes([...tempBox]);

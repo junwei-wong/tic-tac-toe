@@ -1,4 +1,4 @@
-# tic-tac-too
+# tic-tac-toe
 
 ## CLI Commands
 

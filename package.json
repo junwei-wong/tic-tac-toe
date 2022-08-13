@@ -1,17 +1,18 @@
 {
   "private": true,
-  "name": "tic-tac-toe", 
-  "homepage": "https://junwei-wong.github.io/tic-tac-toe/",
+  "name": "tic-tac-toe",
+  "homepage": "https://junwei-wong.github.io/tic-tac-toe",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "build": "preact build",
-    "predeploy": "npm run build", 
-    "deploy": "gh-pages -d build", 
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "serve": "sirv build --port 8080 --cors --single",
     "dev": "preact watch",
     "lint": "eslint src",
-    "test": "jest"
+    "test": "jest",
+    "build:gh": "GITHUB_PAGES=tic-tac-toe preact build && dot-json ./build/manifest.json start_url \"/tic-tac-toe/\""
   },
   "eslintConfig": {
     "extends": "preact",
@@ -20,6 +21,7 @@
     ]
   },
   "devDependencies": {
+    "dot-json": "^1.2.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-preact-pure": "^2.0.0",
     "eslint": "^6.0.1",

@@ -1,0 +1,60 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	background: #FAFAFA;
+	font-family: 'Helvetica Neue', arial, sans-serif;
+	font-weight: 400;
+	color: #444;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#app {
+	height: 100%;
+}
+
+.title__SWqml{
+  display: block;
+  text-align: center;
+  margin: auto; 
+  /* height: 60px; */
+  width: 90%;
+}
+
+.gameBoard__ggEuk{
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto; 
+  padding-top: 10px;
+  width: 150px;
+  height: 150px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.boxes__3Zg8F{
+  width: 33.33%;
+  height: 33.33%;
+  outline: 1px solid black;
+  cursor: pointer;
+}
+
+.icon__PjHMG{
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.iconintitle__oq0Vi{
+  width: 40px;
+  height: 40px;
+}
+
+/*# sourceMappingURL=ssr-bundle.5b396.css.map*/

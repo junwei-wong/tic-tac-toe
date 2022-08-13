@@ -1,12 +1,13 @@
 import { useEffect, useState } from "preact/hooks";
 import Boxes from "./Boxes";
+import { getXicon, getOicon } from "./Icons";
 import { checkWin } from "../utils/helperFunctions";
 import style from "./style.css";
 
 const initialState = [null, null, null, null, null, null, null, null, null];
 
 const GameBoard = () => {
-  const [turn, setTurn] = useState(true);
+  const [turn, setTurn] = useState(false);
   const [boxes, setBoxes] = useState([...initialState]);
   const [box1, box2, box3, box4, box5, box6, box7, box8, box9] = boxes;
 
@@ -58,7 +59,10 @@ const GameBoard = () => {
     }
   }, [box3, box5, box7]);
 
-  const resetGame = () => setBoxes([...initialState]);
+  const resetGame = () => {
+    setBoxes([...initialState]);
+    setTurn(false);
+  };
 
   const changeBoxValue = (boxValue, index) => {
     if (boxValue === null) {
@@ -70,9 +74,12 @@ const GameBoard = () => {
   };
 
   return (
-    <div className={style.tictactoe}>
-      <h1 className={style.title}>{} Turn</h1>
-      <button onClick={resetGame}>Reset</button>
+    <>
+      <div className={style.header}>
+        {turn ? getXicon(style.iconintitle) : getOicon(style.iconintitle)}
+        <label>Turn</label>
+        <button onClick={resetGame}>Reset</button>
+      </div>
       <div className={style.gameBoard}>
         {boxes.map((boxValue, index) => (
           <Boxes
@@ -82,7 +89,7 @@ const GameBoard = () => {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

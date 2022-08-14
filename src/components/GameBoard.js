@@ -130,7 +130,6 @@ const GameBoard = () => {
         <button onClick={resetGame}>Reset</button>
       </div>
       <div className={style.gameBoard}>
-        {console.log("hello")}
         {boxes.map((boxValue, index) => (
           <Boxes
             boxValue={boxValue}

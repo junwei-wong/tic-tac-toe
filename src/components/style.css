@@ -12,6 +12,7 @@
   height: 15em;
   flex-wrap: wrap;
 }
+
 .resetButton{
   padding: .75em 1.5em;
   cursor: pointer;
@@ -24,6 +25,20 @@
 }
 .resetButton:hover{
   background-color: #91989e;
+}
+
+.undoButton{
+  padding: .75em 1.5em;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: rgb(255, 0, 0);
+  color: #fff;
+  font-size: 1em;
+}
+.undoButton:hover{
+  background-color: rgba(255, 0, 0, 0.575);
 }
 
 .boxes{
@@ -55,4 +70,9 @@
 .scoreBoard{ 
   display: flex;
   align-items: center;
+}
+
+.buttonGroup{
+  display: flex;
+  flex-direction: row;
 }

@@ -7,7 +7,6 @@ import {
   showWinnerAlert,
   showTieAlert,
 } from "../utils/helperFunctions";
-import Swal from "sweetalert2";
 import style from "./style.css";
 
 const initialState = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -31,6 +30,7 @@ const scoreReducer = (state, action) => {
 
 const GameBoard = () => {
   const [turn, setTurn] = useState(0);
+  const [moveHistory, setMoveHistory] = useState([]);
   const [boxes, setBoxes] = useState([...initialState]);
   const [score, dispatchScore] = useReducer(scoreReducer, { ...initialScore });
   const [freezeGame, setFreezeGame] = useState(false);
@@ -95,13 +95,11 @@ const GameBoard = () => {
   }, [turn]);
 
   const resetGame = () => {
-    setWinner(false);
+    if (winner) setWinner(false);
     setBoxes([...initialState]);
     setTurn(0);
     setFreezeGame(false);
   };
-
-  const changeTurn = () => setTurn((prevState) => prevState + 1);
 
   const incrementWinnerScore = (symbol) => {
     if (symbol === "O") {
@@ -111,12 +109,27 @@ const GameBoard = () => {
     }
   };
 
-  const changeBoxValue = (initialBoxValue, index) => {
+  const addValueToBox = (initialBoxValue, index) => {
     if (typeof initialBoxValue === "number" && !freezeGame) {
       const tempBox = [...boxes];
+      setMoveHistory((prevState) => [...prevState, tempBox[index]]);
       tempBox[index] = convertTurnToSymbol(turn);
       setBoxes([...tempBox]);
-      changeTurn();
+      setTurn((prevState) => prevState + 1);
+    }
+  };
+
+  const undoLastMove = () => {
+    const lastMove = moveHistory[moveHistory.length - 1];
+    const indexOfLastMove = lastMove - 1;
+    const tempBox = [...boxes];
+    if (typeof tempBox[indexOfLastMove] === "string" && !freezeGame) {
+      tempBox[indexOfLastMove] = lastMove;
+      const tempMoveHistory = [...moveHistory];
+      tempMoveHistory.pop();
+      setMoveHistory([...tempMoveHistory]);
+      setBoxes([...tempBox]);
+      setTurn((prevState) => prevState - 1);
     }
   };
 
@@ -128,16 +141,21 @@ const GameBoard = () => {
           ? getOicon(style.iconInTitle)
           : getXicon(style.iconInTitle)}
         <h2>Turn</h2>
-        <button className={style.resetButton} onClick={resetGame}>
-          Reset
-        </button>
+        <div className={style.buttonGroup}>
+          <button className={style.undoButton} onClick={undoLastMove}>
+            Undo
+          </button>
+          <button className={style.resetButton} onClick={resetGame}>
+            Reset
+          </button>
+        </div>
       </div>
       <div className={style.gameBoard}>
         {boxes.map((boxValue, index) => (
           <Boxes
             boxValue={boxValue}
             index={index}
-            changeBoxValue={changeBoxValue}
+            changeBoxValue={addValueToBox}
           />
         ))}
       </div>

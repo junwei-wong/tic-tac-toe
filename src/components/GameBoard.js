@@ -62,13 +62,13 @@ const GameBoard = () => {
     }
   }, [box3, box5, box7]);
 
-  useEffect(() => {
-    if (winner) showWinnerAlert();
-  }, [winner]);
+  // useEffect(() => {
+  //   if (winner) showWinnerAlert();
+  // }, [winner]);
 
-  useEffect(() => {
-    if (turn === 9) showTieAlert();
-  }, [turn]);
+  // useEffect(() => {
+  //   if (turn === 9) showTieAlert();
+  // }, [turn]);
 
   const resetGame = () => {
     setWinner(false);

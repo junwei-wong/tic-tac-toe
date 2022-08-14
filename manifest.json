@@ -1,6 +1,6 @@
 {
-  "name": "tic-tac-too",
-  "short_name": "tic-tac-too",
+  "name": "tic-tac-toe",
+  "short_name": "ttt",
   "start_url": "/tic-tac-toe/",
   "display": "standalone",
   "orientation": "portrait",

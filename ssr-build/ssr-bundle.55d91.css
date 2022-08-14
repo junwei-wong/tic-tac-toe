@@ -1,0 +1,122 @@
+html, body, #preact_root {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	background: #FAFAFA;
+	font-family: 'Helvetica Neue', arial, sans-serif;
+	font-weight: 400;
+	color: #444;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align:center;
+      align-items:center;
+  -ms-flex-pack:start;
+      justify-content:flex-start;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#app {
+	height: 100%;
+}
+
+.header__lnNCj{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+
+.gameBoard__ggEuk{
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 10px;
+  width: 15em;
+  height: 15em;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.resetButton__rf6N9{
+  padding: .75em 1.5em;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: #6e7881;
+  color: #fff;
+  font-size: 1em;
+}
+.resetButton__rf6N9:hover{
+  background-color: #91989e;
+}
+
+.undoButton__v6y\+I{
+  padding: .75em 1.5em;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: rgb(255, 0, 0);
+  color: #fff;
+  font-size: 1em;
+}
+.undoButton__v6y\+I:hover{
+  background-color: rgba(255, 0, 0, 0.575);
+}
+
+.boxes__3Zg8F{
+  width: 33.33%;
+  height: 33.33%;
+  outline: 1px solid black;
+  cursor: pointer;
+  border-radius: 0.25em;
+}
+
+.icon__PjHMG{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.iconInTitle__Otoo6{
+  width: 3em;
+  height: 3em;
+}
+
+.iconInScore__MLIMy{
+  width: 2em;
+  height: 2em;
+}
+
+.scoreBoard__GsJt7{ 
+  display: -ms-flexbox; 
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.buttonGroup__Mg9WR{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+}
+
+/*# sourceMappingURL=ssr-bundle.55d91.css.map*/

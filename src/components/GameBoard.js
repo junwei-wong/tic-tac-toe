@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useState } from "preact/hooks";
 import Boxes from "./Boxes";
-import { getXicon, getOicon } from "./Icons";
+import ScoreBoard from "./ScoreBoard";
+import Header from "./Header";
 import {
   checkWin,
   convertTurnToSymbol,
@@ -135,21 +136,7 @@ const GameBoard = () => {
 
   return (
     <>
-      <div className={style.header}>
-        <h1>Tic-Tac-Toe</h1>
-        {turn % 2 === 0
-          ? getOicon(style.iconInTitle)
-          : getXicon(style.iconInTitle)}
-        <h2>Turn</h2>
-        <div className={style.buttonGroup}>
-          <button className={style.undoButton} onClick={undoLastMove}>
-            Undo
-          </button>
-          <button className={style.resetButton} onClick={resetGame}>
-            Reset
-          </button>
-        </div>
-      </div>
+      <Header turn={turn} undoLastMove={undoLastMove} resetGame={resetGame} />
       <div className={style.gameBoard}>
         {boxes.map((boxValue, index) => (
           <Boxes
@@ -159,10 +146,7 @@ const GameBoard = () => {
           />
         ))}
       </div>
-      <div className={style.scoreBoard}>
-        <h3>{score.o} -</h3> {getOicon(style.iconInScore)}
-        {getXicon(style.iconInScore)} <h3>- {score.x}</h3>
-      </div>
+      <ScoreBoard scoreO={score.o} scoreX={score.x} />
     </>
   );
 };

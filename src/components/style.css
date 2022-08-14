@@ -42,7 +42,17 @@
   height: 100%;
 }
 
-.iconintitle{
+.iconInTitle{
   width: 3em;
   height: 3em;
+}
+
+.iconInScore{
+  width: 2em;
+  height: 2em;
+}
+
+.scoreBoard{ 
+  display: flex;
+  align-items: center;
 }

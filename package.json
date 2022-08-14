@@ -35,7 +35,8 @@
     "gh-pages": "^4.0.0",
     "preact": "^10.3.2",
     "preact-render-to-string": "^5.1.4",
-    "preact-router": "^3.2.1"
+    "preact-router": "^3.2.1",
+    "sweetalert2": "^11.4.26"
   },
   "jest": {
     "preset": "jest-preset-preact",

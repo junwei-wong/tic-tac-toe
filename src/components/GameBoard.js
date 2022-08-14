@@ -126,8 +126,10 @@ const GameBoard = () => {
         {turn % 2 === 0
           ? getOicon(style.iconintitle)
           : getXicon(style.iconintitle)}
-        <label>Turn</label>
-        <button onClick={resetGame}>Reset</button>
+        <h2>Turn</h2>
+        <button className={style.resetButton} onClick={resetGame}>
+          Reset
+        </button>
       </div>
       <div className={style.gameBoard}>
         {boxes.map((boxValue, index) => (

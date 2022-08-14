@@ -1,15 +1,38 @@
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useReducer, useState } from "preact/hooks";
 import Boxes from "./Boxes";
 import { getXicon, getOicon } from "./Icons";
-import { checkWin } from "../utils/helperFunctions";
-import Swal from "sweetalert2";
+import {
+  checkWin,
+  convertTurnToSymbol,
+  showWinnerAlert,
+  showTieAlert,
+} from "../utils/helperFunctions";
 import style from "./style.css";
 
 const initialState = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const initialScore = { x: 0, o: 0 };
+const scoreReducer = (state, action) => {
+  switch (action.type) {
+    case "X_WINS":
+      return {
+        ...state,
+        x: state.x + 1,
+      };
+    case "O_WINS":
+      return {
+        ...state,
+        o: state.o + 1,
+      };
+    default:
+      return { ...state };
+  }
+};
 
 const GameBoard = () => {
   const [turn, setTurn] = useState(0);
+  const [moveHistory, setMoveHistory] = useState([]);
   const [boxes, setBoxes] = useState([...initialState]);
+  const [score, dispatchScore] = useReducer(scoreReducer, { ...initialScore });
   const [freezeGame, setFreezeGame] = useState(false);
   const [winner, setWinner] = useState(false);
   const [box1, box2, box3, box4, box5, box6, box7, box8, box9] = boxes;
@@ -63,59 +86,50 @@ const GameBoard = () => {
   }, [box3, box5, box7]);
 
   useEffect(() => {
-    if (winner) showWinnerAlert();
+    if (winner)
+      showWinnerAlert(turn, incrementWinnerScore, resetGame, setFreezeGame);
   }, [winner]);
 
   useEffect(() => {
-    if (turn === 9) showTieAlert();
+    if (turn === 9) showTieAlert(resetGame, setFreezeGame);
   }, [turn]);
 
   const resetGame = () => {
-    setWinner(false);
+    if (winner) setWinner(false);
     setBoxes([...initialState]);
     setTurn(0);
     setFreezeGame(false);
   };
 
-  const changeTurn = () => setTurn((prevState) => prevState + 1);
-
-  const convertTurnToSymbol = (turnValue) => {
-    return turnValue % 2 === 0 ? "O" : "X";
+  const incrementWinnerScore = (symbol) => {
+    if (symbol === "O") {
+      dispatchScore({ type: "O_WINS" });
+    } else if (symbol === "X") {
+      dispatchScore({ type: "X_WINS" });
+    }
   };
 
-  const showWinnerAlert = async () => {
-    const previousTurn = turn - 1;
-    await Swal.fire({
-      title: "Victory!",
-      text: `${convertTurnToSymbol(previousTurn)} wins`,
-      confirmButtonText: "Cool!",
-      showCancelButton: true,
-      cancelButtonText: "New Game",
-    }).then((result) => {
-      if (result.isDismissed) resetGame();
-      else if (result.isConfirmed) setFreezeGame(true);
-    });
-  };
-
-  const showTieAlert = async () => {
-    await Swal.fire({
-      title: "Tie!",
-      text: "Equally skilled",
-      confirmButtonText: "Aw man!",
-      showCancelButton: true,
-      cancelButtonText: "New Game",
-    }).then((result) => {
-      if (result.isDismissed) resetGame();
-      else if (result.isConfirmed) setFreezeGame(true);
-    });
-  };
-
-  const changeBoxValue = (initialBoxValue, index) => {
+  const addValueToBox = (initialBoxValue, index) => {
     if (typeof initialBoxValue === "number" && !freezeGame) {
       const tempBox = [...boxes];
+      setMoveHistory((prevState) => [...prevState, tempBox[index]]);
       tempBox[index] = convertTurnToSymbol(turn);
       setBoxes([...tempBox]);
-      changeTurn();
+      setTurn((prevState) => prevState + 1);
+    }
+  };
+
+  const undoLastMove = () => {
+    const lastMove = moveHistory[moveHistory.length - 1];
+    const indexOfLastMove = lastMove - 1;
+    const tempBox = [...boxes];
+    if (typeof tempBox[indexOfLastMove] === "string" && !freezeGame) {
+      tempBox[indexOfLastMove] = lastMove;
+      const tempMoveHistory = [...moveHistory];
+      tempMoveHistory.pop();
+      setMoveHistory([...tempMoveHistory]);
+      setBoxes([...tempBox]);
+      setTurn((prevState) => prevState - 1);
     }
   };
 
@@ -124,19 +138,30 @@ const GameBoard = () => {
       <div className={style.header}>
         <h1>Tic-Tac-Toe</h1>
         {turn % 2 === 0
-          ? getOicon(style.iconintitle)
-          : getXicon(style.iconintitle)}
-        <label>Turn</label>
-        <button onClick={resetGame}>Reset</button>
+          ? getOicon(style.iconInTitle)
+          : getXicon(style.iconInTitle)}
+        <h2>Turn</h2>
+        <div className={style.buttonGroup}>
+          <button className={style.undoButton} onClick={undoLastMove}>
+            Undo
+          </button>
+          <button className={style.resetButton} onClick={resetGame}>
+            Reset
+          </button>
+        </div>
       </div>
       <div className={style.gameBoard}>
         {boxes.map((boxValue, index) => (
           <Boxes
             boxValue={boxValue}
             index={index}
-            changeBoxValue={changeBoxValue}
+            changeBoxValue={addValueToBox}
           />
         ))}
+      </div>
+      <div className={style.scoreBoard}>
+        <h3>{score.o} -</h3> {getOicon(style.iconInScore)}
+        {getXicon(style.iconInScore)} <h3>- {score.x}</h3>
       </div>
     </>
   );

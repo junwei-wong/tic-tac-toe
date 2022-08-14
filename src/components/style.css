@@ -2,16 +2,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 10px;
   flex-direction: column;
 }
 
 .gameBoard{
   display: flex;
   padding-top: 10px;
-  width: 150px;
-  height: 150px;
+  width: 15em;
+  height: 15em;
   flex-wrap: wrap;
+}
+
+.resetButton{
+  padding: .75em 1.5em;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: #6e7881;
+  color: #fff;
+  font-size: 1em;
+}
+.resetButton:hover{
+  background-color: #91989e;
+}
+
+.undoButton{
+  padding: .75em 1.5em;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: rgb(255, 0, 0);
+  color: #fff;
+  font-size: 1em;
+}
+.undoButton:hover{
+  background-color: rgba(255, 0, 0, 0.575);
 }
 
 .boxes{
@@ -19,16 +46,33 @@
   height: 33.33%;
   outline: 1px solid black;
   cursor: pointer;
+  border-radius: 0.25em;
 }
 
 .icon{
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
-  margin: auto;
 }
 
-.iconintitle{
-  width: 40px;
-  height: 40px;
+.iconInTitle{
+  width: 3em;
+  height: 3em;
+}
+
+.iconInScore{
+  width: 2em;
+  height: 2em;
+}
+
+.scoreBoard{ 
+  display: flex;
+  align-items: center;
+}
+
+.buttonGroup{
+  display: flex;
+  flex-direction: row;
 }

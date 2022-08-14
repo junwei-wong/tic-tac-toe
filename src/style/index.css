@@ -9,6 +9,10 @@ html, body {
 	color: #444;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+  display: flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex-direction: column;
 }
 
 * {

@@ -9,6 +9,14 @@ html, body {
 	color: #444;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align:center;
+      align-items:center;
+  -ms-flex-pack:start;
+      justify-content:flex-start;
+  -ms-flex-direction: column;
+      flex-direction: column;
 }
 
 * {
@@ -19,18 +27,21 @@ html, body {
 	height: 100%;
 }
 
-.title__SWqml{
-  display: block;
-  text-align: center;
-  margin: auto; 
-  /* height: 60px; */
-  width: 90%;
+.header__lnNCj{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  padding-top: 10px;
+  -ms-flex-direction: column;
+      flex-direction: column;
 }
 
 .gameBoard__ggEuk{
   display: -ms-flexbox;
   display: flex;
-  margin: auto; 
   padding-top: 10px;
   width: 150px;
   height: 150px;
@@ -57,4 +68,4 @@ html, body {
   height: 40px;
 }
 
-/*# sourceMappingURL=ssr-bundle.5b396.css.map*/
+/*# sourceMappingURL=ssr-bundle.5c0f4.css.map*/

@@ -121,7 +121,6 @@ const GameBoard = () => {
 
   return (
     <>
-      {console.log("hello")}
       <div className={style.header}>
         <h1>Tic-Tac-Toe</h1>
         {turn % 2 === 0
@@ -131,6 +130,7 @@ const GameBoard = () => {
         <button onClick={resetGame}>Reset</button>
       </div>
       <div className={style.gameBoard}>
+        {console.log("hello")}
         {boxes.map((boxValue, index) => (
           <Boxes
             boxValue={boxValue}

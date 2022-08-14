@@ -1,7 +1,12 @@
 import { useEffect, useReducer, useState } from "preact/hooks";
 import Boxes from "./Boxes";
 import { getXicon, getOicon } from "./Icons";
-import { checkWin } from "../utils/helperFunctions";
+import {
+  checkWin,
+  convertTurnToSymbol,
+  showWinnerAlert,
+  showTieAlert,
+} from "../utils/helperFunctions";
 import Swal from "sweetalert2";
 import style from "./style.css";
 
@@ -81,11 +86,12 @@ const GameBoard = () => {
   }, [box3, box5, box7]);
 
   useEffect(() => {
-    if (winner) showWinnerAlert();
+    if (winner)
+      showWinnerAlert(turn, incrementWinnerScore, resetGame, setFreezeGame);
   }, [winner]);
 
   useEffect(() => {
-    if (turn === 9) showTieAlert();
+    if (turn === 9) showTieAlert(resetGame, setFreezeGame);
   }, [turn]);
 
   const resetGame = () => {
@@ -97,45 +103,12 @@ const GameBoard = () => {
 
   const changeTurn = () => setTurn((prevState) => prevState + 1);
 
-  const convertTurnToSymbol = (turnValue) => {
-    return turnValue % 2 === 0 ? "O" : "X";
-  };
-
   const incrementWinnerScore = (symbol) => {
     if (symbol === "O") {
       dispatchScore({ type: "O_WINS" });
     } else if (symbol === "X") {
       dispatchScore({ type: "X_WINS" });
     }
-  };
-
-  const showWinnerAlert = async () => {
-    const previousTurn = turn - 1;
-    const winnerSymbol = convertTurnToSymbol(previousTurn);
-    incrementWinnerScore(winnerSymbol);
-    await Swal.fire({
-      title: "Victory!",
-      text: `${winnerSymbol} wins`,
-      confirmButtonText: "Cool!",
-      showCancelButton: true,
-      cancelButtonText: "New Game",
-    }).then((result) => {
-      if (result.isDismissed) resetGame();
-      else if (result.isConfirmed) setFreezeGame(true);
-    });
-  };
-
-  const showTieAlert = async () => {
-    await Swal.fire({
-      title: "Tie!",
-      text: "Equally skilled",
-      confirmButtonText: "Aw man!",
-      showCancelButton: true,
-      cancelButtonText: "New Game",
-    }).then((result) => {
-      if (result.isDismissed) resetGame();
-      else if (result.isConfirmed) setFreezeGame(true);
-    });
   };
 
   const changeBoxValue = (initialBoxValue, index) => {

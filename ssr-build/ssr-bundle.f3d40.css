@@ -1,4 +1,4 @@
-html, body {
+html, body, #preact_root {
 	height: 100%;
 	width: 100%;
 	padding: 0;
@@ -68,4 +68,4 @@ html, body {
   height: 40px;
 }
 
-/*# sourceMappingURL=ssr-bundle.5c0f4.css.map*/
+/*# sourceMappingURL=ssr-bundle.f3d40.css.map*/

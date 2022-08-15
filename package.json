@@ -11,7 +11,7 @@
     "serve": "sirv build --port 8080 --cors --single",
     "dev": "preact watch",
     "lint": "eslint src",
-    "test": "jest",
+    "test": "jest --coverage",
     "build:gh": "GITHUB_PAGES=tic-tac-toe preact build && dot-json ./build/manifest.json start_url \"/tic-tac-toe/\""
   },
   "eslintConfig": {
@@ -43,6 +43,15 @@
     "setupFiles": [
       "<rootDir>/tests/__mocks__/browserMocks.js",
       "<rootDir>/tests/__mocks__/setupTests.js"
-    ]
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "testMatch": [
+      "**/__test__/**/*.js?(x)"
+    ],
+    "transform": {
+      "^.+\\.svg$": "<rootDir>/config/jest/svgTransform.js"
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { h } from "preact";
 import Xicon from "./../assets/icons/x-svgrepo-com.svg";
 import Oicon from "./../assets/icons/circle-svgrepo-com.svg";
 import style from "./style.css";

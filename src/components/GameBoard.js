@@ -1,3 +1,4 @@
+import { h, Fragment } from "preact";
 import { useEffect, useReducer, useState } from "preact/hooks";
 import Boxes from "./Boxes";
 import ScoreBoard from "./ScoreBoard";
@@ -135,7 +136,7 @@ const GameBoard = () => {
   };
 
   return (
-    <>
+    <Fragment>
       <Header turn={turn} undoLastMove={undoLastMove} resetGame={resetGame} />
       <div className={style.gameBoard}>
         {boxes.map((boxValue, index) => (
@@ -147,7 +148,7 @@ const GameBoard = () => {
         ))}
       </div>
       <ScoreBoard scoreO={score.o} scoreX={score.x} />
-    </>
+    </Fragment>
   );
 };
 

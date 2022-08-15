@@ -1,3 +1,4 @@
+import { h } from "preact";
 import { getXicon, getOicon } from "./Icons";
 import style from "./style.css";
 
